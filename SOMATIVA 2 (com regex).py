@@ -3,21 +3,21 @@ import os
 import re
 
 def cadastrar_usuario():
-    regex = re.compile(r'^[a-zA-Z]{2}\d{2}$')
+    regex = re.compile(r'^[A-Za-z0-9]{5}$')
     nome = input("Digite o nome do usuário (até 20 caracteres): ")
-    senha = input("Digite a senha do usuário (4 caracteres): ")
+    senha = input("Digite a senha do usuário (8 caracteres): ")
 
     if regex.fullmatch(senha):
         senha_hash = hashlib.md5(senha.encode()).hexdigest()
-        with open(r"C:\Users\joao.merlin.GRUPOMARISTA\SOMATIVA-2-SI\usuarios.txt", "a") as file:
+        with open(r"C:\Users\joaom\OneDrive - Grupo Marista\Desktop\Somativa2\Somativa-2\usuarios.txt", "a") as file:
             file.write(f"{nome},{senha_hash}\n")
 
         print("Usuário cadastrado com sucesso!")
     else:
         print("Escreva uma senha valida")
 
-    if len(nome) > 20 or len(senha) != 4:
-        print("Erro: Nome deve ter até 20 caracteres e senha deve ter 4 caracteres.")
+    if len(nome) > 20 or len(senha) != 5:
+        print("Erro: Nome deve ter até 20 caracteres e senha deve ter 8 caracteres.")
         return
 
 def autenticar_usuario():
@@ -26,7 +26,7 @@ def autenticar_usuario():
 
     senha_hash = hashlib.md5(senha.encode()).hexdigest()
 
-    with open(r"C:\Users\joao.merlin.GRUPOMARISTA\SOMATIVA-2-SI\usuarios.txt","r") as file:
+    with open(r"C:\Users\joaom\OneDrive - Grupo Marista\Desktop\Somativa2\Somativa-2\usuarios.txt","r") as file:
         for line in file:
             usuario, senha_armazenada = line.strip().split(",")
             print(line)
